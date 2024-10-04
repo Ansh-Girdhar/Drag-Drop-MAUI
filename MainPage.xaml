@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DragandDrop.MainPage" Loaded="ContentPage_Loaded">
+    <Grid RowDefinitions="auto, *">
+        <!-- CollectionView to display file attachments -->
+        <CollectionView  ItemsSource="{Binding FilePaths}" HeightRequest="200" Grid.Row="0">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout Orientation="Vertical" Padding="10">
+                        <Label Text="{Binding FileName}" FontAttributes="Bold" />
+                        <Label Text="{Binding FilePath}" FontAttributes="Italic" />
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <!-- Dotted border for the file drop area -->
+        <Border Grid.Row="1"
+                Stroke="Gray" 
+                StrokeDashArray="2,2" 
+                StrokeThickness="2"
+                HeightRequest="300"
+                HorizontalOptions="Fill" 
+                VerticalOptions="Start" 
+                Padding="10">
+
+            <ContentView 
+                x:Name="DropZone" BackgroundColor="LightGray">
+                <ContentView.GestureRecognizers>
+                    <DropGestureRecognizer AllowDrop="True"/>
+                </ContentView.GestureRecognizers>
+                <Label Text="Drag and drop files here" 
+       HorizontalOptions="Center" 
+       VerticalOptions="Center" 
+       FontAttributes="Bold" />
+            </ContentView>
+        </Border>
+
+    </Grid>
+</ContentPage>
